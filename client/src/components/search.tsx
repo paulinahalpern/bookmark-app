@@ -1,17 +1,13 @@
 import { useEffect } from "react";
-import { useState } from "react";
 import { api } from "../lib/api";
 
-export default function Search() {
-  type Url = {
-    title: string;
-    description: string;
-    image: string;
-    url: string;
-  };
-  const [bookmark, setBookmark] = useState<Url[]>([]);
-  const [urlInput, setUrlInput] = useState<string>("");
-
+export default function Search({
+  urlInput,
+  setBookmark,
+  setUrlInput,
+  handleChange,
+}) { 
+  
   useEffect(() => {
     api
       .get("/api")
@@ -23,10 +19,6 @@ export default function Search() {
       });
   }, []);
 
-  function handleUrlChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setUrlInput(event.target.value);
-  }
-
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (urlInput.trim() === "") {
@@ -34,7 +26,9 @@ export default function Search() {
     }
     try {
       const response = await api.post("/api", { url: urlInput });
-      setBookmark((prev) => [...prev, response.data]);
+      const [bookmark] = response.data;
+      const newState = setBookmark((prev) => [...prev, bookmark]);
+      console.log("Updated bookmarks:", newState);
       setUrlInput("");
     } catch (error) {
       console.error("Error adding api", error);
@@ -49,15 +43,10 @@ export default function Search() {
           id="addInput"
           type="text"
           value={urlInput}
-          onChange={handleUrlChange}
+          onChange={handleChange}
         ></input>
         <button type="submit">ADD</button>
       </form>
-      <ol>
-        {bookmark.map((item, index) => (
-          <li key={index}>{item.url}</li>
-        ))}
-      </ol>
     </div>
   );
 }

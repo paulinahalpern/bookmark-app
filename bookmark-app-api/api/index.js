@@ -8,8 +8,6 @@ const axios = require("axios").default;
 
 const urlRouter = require("../routes/api.js");
 
-app.use("/api", require("../routes/api.js"));
-
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
@@ -24,8 +22,8 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
-      secure: true,
-      sameSite: "none",
+      secure: false,
+      sameSite: "lax",
     },
     store: new ConnectSessionKnexStore({
       knex: knex,
