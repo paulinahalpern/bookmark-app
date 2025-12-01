@@ -25,7 +25,7 @@ export default function App() {
         setUrlInput={setUrlInput}
         handleChange={handleChange}
       />
-      <BookmarkList bookmark={bookmark} handleChange={handleChange} />
+      <BookmarkList bookmark={bookmark} />
     </div>
   );
 }
