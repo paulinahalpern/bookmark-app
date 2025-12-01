@@ -1,4 +1,15 @@
-export default function BookmarkList({ bookmark }) {
+interface Url {
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+}
+
+interface BookmarkProps {
+  bookmark: Url[];
+}
+
+export default function BookmarkList({ bookmark }: BookmarkProps) {
   return (
     <div>
       <ol>
