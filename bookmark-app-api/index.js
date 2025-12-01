@@ -3,10 +3,10 @@ const app = express();
 const cors = require("cors");
 const session = require("express-session");
 const { ConnectSessionKnexStore } = require("connect-session-knex");
-const knex = require("../knex.js");
+const knex = require("./knex.js");
 const axios = require("axios").default;
 
-const urlRouter = require("../routes/api.js");
+const urlRouter = require("./routes/api.js");
 
 app.use(
   cors({
