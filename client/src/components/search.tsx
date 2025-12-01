@@ -1,13 +1,26 @@
 import { useEffect } from "react";
 import { api } from "../lib/api";
 
+interface Url {
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+}
+
+interface SearchProps {
+  urlInput: string;
+  setBookmark: React.Dispatch<React.SetStateAction<Url[]>>;
+  setUrlInput: React.Dispatch<React.SetStateAction<string>>;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
 export default function Search({
   urlInput,
   setBookmark,
   setUrlInput,
   handleChange,
-}) { 
-  
+}: SearchProps) {
   useEffect(() => {
     api
       .get("/api")
