@@ -7,7 +7,6 @@
     "build": "npm run migrate",
     "dev": "node --watch --env-file=.env api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "queries": "node api/index.js",
     "migrate": "npx knex migrate:latest --knexfile ./knexfile.js"
   },
   "author": "",
