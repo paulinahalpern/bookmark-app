@@ -2,15 +2,22 @@ import BookmarkList from "./components/bookmark-list";
 import Search from "./components/search";
 import { useState } from "react";
 
-export default function App() {
-  type Url = {
-    title: string;
-    description: string;
-    image: string;
-    url: string;
-  };
+export type Bookmark = {
+  index: string;
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+};
 
-  const [bookmark, setBookmark] = useState<Url[]>([]);
+export type BookmarkProps = {
+  bookmark: Bookmark[];
+  setBookmark: React.Dispatch<React.SetStateAction<Bookmark[]>>;
+};
+
+export default function App() {
+  const [bookmark, setBookmark] = useState<Bookmark[]>([]);
   const [urlInput, setUrlInput] = useState<string>("");
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -25,7 +32,7 @@ export default function App() {
         setUrlInput={setUrlInput}
         handleChange={handleChange}
       />
-      <BookmarkList bookmark={bookmark} />
+      <BookmarkList bookmark={bookmark} setBookmark={setBookmark} />
     </div>
   );
 }

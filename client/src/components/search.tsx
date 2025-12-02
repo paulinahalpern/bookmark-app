@@ -1,16 +1,10 @@
 import { useEffect } from "react";
 import { api } from "../lib/api";
-
-interface Url {
-  title: string;
-  description: string;
-  url: string;
-  image: string;
-}
+import type { Bookmark } from "../App";
 
 interface SearchProps {
   urlInput: string;
-  setBookmark: React.Dispatch<React.SetStateAction<Url[]>>;
+  setBookmark: React.Dispatch<React.SetStateAction<Bookmark[]>>;
   setUrlInput: React.Dispatch<React.SetStateAction<string>>;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

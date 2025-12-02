@@ -1,15 +1,15 @@
-interface Url {
-  title: string;
-  description: string;
-  url: string;
-  image: string;
-}
+import type { BookmarkProps } from "../App";
+import { api } from "../lib/api";
 
-interface BookmarkProps {
-  bookmark: Url[];
-}
-
-export default function BookmarkList({ bookmark }: BookmarkProps) {
+export default function BookmarkList({ bookmark, setBookmark }: BookmarkProps) {
+  async function deleteBookmark(id: string, index: number) {
+    try {
+      await api.delete(`/api/${id}`);
+      setBookmark((prevBookmark) => prevBookmark.filter((_, i) => i !== index));
+    } catch (error) {
+      console.error("Error deleting bookmark- frontend", error);
+    }
+  }
   return (
     <div>
       <ol>
@@ -21,6 +21,9 @@ export default function BookmarkList({ bookmark }: BookmarkProps) {
             <p>
               <img src={item.image} style={{ maxWidth: "200px" }} />
             </p>
+            <button onClick={() => deleteBookmark(item.id, index)}>
+              DELETE
+            </button>
           </li>
         ))}
       </ol>

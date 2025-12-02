@@ -45,4 +45,14 @@ router.post("/api", async (req, res) => {
   }
 });
 
+router.delete("/api/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    await knex("url").where("id", id).del();
+    res.sendStatus(204);
+  } catch (error) {
+    console.error("Error deleting bookmark-backend", error);
+  }
+});
+
 module.exports = router;
