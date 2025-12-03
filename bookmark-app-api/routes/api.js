@@ -7,7 +7,7 @@ const axios = require("axios").default;
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.get("/api", async (req, res) => {
+router.get("/bookmarks", async (req, res) => {
   try {
     const data = await knex("url");
     res.status(200).json(data);
@@ -16,7 +16,7 @@ router.get("/api", async (req, res) => {
   }
 });
 
-router.post("/api", async (req, res) => {
+router.post("/bookmarks", async (req, res) => {
   try {
     const { url } = req.body;
     const id = crypto.randomUUID();
@@ -42,6 +42,16 @@ router.post("/api", async (req, res) => {
     console.log(url);
   } catch (error) {
     console.error("Error adding api- backend", error);
+  }
+});
+
+router.delete("/bookmarks/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    await knex("url").where("id", id).del();
+    res.sendStatus(204);
+  } catch (error) {
+    console.error("Error deleting bookmark-backend", error);
   }
 });
 

@@ -1,15 +1,6 @@
-interface Url {
-  title: string;
-  description: string;
-  url: string;
-  image: string;
-}
+import type { BookmarkProps } from "../App";
 
-interface BookmarkProps {
-  bookmark: Url[];
-}
-
-export default function BookmarkList({ bookmark }: BookmarkProps) {
+export default function BookmarkList({ bookmark, onDelete }: BookmarkProps) {
   return (
     <div>
       <ol>
@@ -21,6 +12,7 @@ export default function BookmarkList({ bookmark }: BookmarkProps) {
             <p>
               <img src={item.image} style={{ maxWidth: "200px" }} />
             </p>
+            <button onClick={() => onDelete(item.id, index)}>DELETE</button>
           </li>
         ))}
       </ol>
