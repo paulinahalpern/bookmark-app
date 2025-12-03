@@ -1,15 +1,6 @@
 import type { BookmarkProps } from "../App";
-import { api } from "../lib/api";
 
-export default function BookmarkList({ bookmark, setBookmark }: BookmarkProps) {
-  async function deleteBookmark(id: string, index: number) {
-    try {
-      await api.delete(`/api/${id}`);
-      setBookmark((prevBookmark) => prevBookmark.filter((_, i) => i !== index));
-    } catch (error) {
-      console.error("Error deleting bookmark- frontend", error);
-    }
-  }
+export default function BookmarkList({ bookmark, onDelete }: BookmarkProps) {
   return (
     <div>
       <ol>
@@ -21,9 +12,7 @@ export default function BookmarkList({ bookmark, setBookmark }: BookmarkProps) {
             <p>
               <img src={item.image} style={{ maxWidth: "200px" }} />
             </p>
-            <button onClick={() => deleteBookmark(item.id, index)}>
-              DELETE
-            </button>
+            <button onClick={() => onDelete(item.id, index)}>DELETE</button>
           </li>
         ))}
       </ol>

@@ -17,7 +17,7 @@ export default function Search({
 }: SearchProps) {
   useEffect(() => {
     api
-      .get("/api")
+      .get("/bookmarks")
       .then((res) => {
         setBookmark(res.data);
       })
@@ -32,7 +32,7 @@ export default function Search({
       return;
     }
     try {
-      const response = await api.post("/api", { url: urlInput });
+      const response = await api.post("/bookmarks", { url: urlInput });
       const [bookmark] = response.data;
       const newState = setBookmark((prev) => [...prev, bookmark]);
       console.log("Updated bookmarks:", newState);

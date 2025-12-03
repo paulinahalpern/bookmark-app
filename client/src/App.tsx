@@ -1,6 +1,7 @@
 import BookmarkList from "./components/bookmark-list";
 import Search from "./components/search";
 import { useState } from "react";
+import { api } from "./lib/api";
 
 export type Bookmark = {
   index: string;
@@ -13,7 +14,7 @@ export type Bookmark = {
 
 export type BookmarkProps = {
   bookmark: Bookmark[];
-  setBookmark: React.Dispatch<React.SetStateAction<Bookmark[]>>;
+  onDelete: (id: string, index: number) => Promise<void>;
 };
 
 export default function App() {
@@ -24,6 +25,15 @@ export default function App() {
     setUrlInput(event.target.value);
   }
 
+  async function deleteBookmark(id: string, index: number) {
+    try {
+      await api.delete(`/bookmarks/${id}`);
+      setBookmark((prevBookmark) => prevBookmark.filter((_, i) => i !== index));
+    } catch (error) {
+      console.error("Error deleting bookmark- frontend", error);
+    }
+  }
+
   return (
     <div>
       <Search
@@ -32,7 +42,7 @@ export default function App() {
         setUrlInput={setUrlInput}
         handleChange={handleChange}
       />
-      <BookmarkList bookmark={bookmark} setBookmark={setBookmark} />
+      <BookmarkList bookmark={bookmark} onDelete={deleteBookmark} />
     </div>
   );
 }
