@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { api } from "../lib/api";
 import type { Bookmark } from "../App";
+import { Button } from "@/components/ui/button";
+import { Input } from "./ui/input";
 
 interface SearchProps {
   urlInput: string;
@@ -43,16 +45,20 @@ export default function Search({
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="flex justify-start">
+      <form onSubmit={handleSubmit} className="flex gap-2 p-10">
         <label htmlFor="addInput"></label>
-        <input
+        <Input
           id="addInput"
           type="text"
           value={urlInput}
           onChange={handleChange}
-        ></input>
-        <button type="submit">ADD</button>
+          className="w-200"
+          placeholder="Enter bookmark URL"
+        ></Input>
+        <Button type="submit" variant="default">
+          ADD
+        </Button>
       </form>
     </div>
   );
