@@ -10,10 +10,17 @@ const authRouter = require("./routes/auth.js");
 const urlRouter = require("./routes/bookmarks.js");
 const usersRouter = require("./routes/users.js");
 
+app.set("trust proxy", 1);
+
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
     credentials: true,
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    preflightContinue: false,
   })
 );
 
@@ -24,8 +31,8 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
     },
     store: new ConnectSessionKnexStore({
       knex: knex,
