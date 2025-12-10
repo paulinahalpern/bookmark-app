@@ -2,6 +2,10 @@ import BookmarkList from "./components/bookmark-list";
 import Search from "./components/search";
 import { useState } from "react";
 import { api } from "./lib/api";
+import { Login } from "./components/login";
+import "./index.css";
+import { Routes, Route } from "react-router-dom";
+import SideBar from "./components/sidebar";
 
 export type Bookmark = {
   index: string;
@@ -36,13 +40,26 @@ export default function App() {
 
   return (
     <div>
-      <Search
-        urlInput={urlInput}
-        setBookmark={setBookmark}
-        setUrlInput={setUrlInput}
-        handleChange={handleChange}
-      />
-      <BookmarkList bookmark={bookmark} onDelete={deleteBookmark} />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/bookmarks"
+          element={
+            <div className="flex min-h-screen bg-gray-100">
+              <SideBar />
+              <div className="flex-1 p-6 space-y-6">
+                <Search
+                  urlInput={urlInput}
+                  setBookmark={setBookmark}
+                  setUrlInput={setUrlInput}
+                  handleChange={handleChange}
+                />
+                <BookmarkList bookmark={bookmark} onDelete={deleteBookmark} />
+              </div>
+            </div>
+          }
+        />
+      </Routes>
     </div>
   );
 }

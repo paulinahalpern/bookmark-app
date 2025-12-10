@@ -13,7 +13,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@react-oauth/google": "^0.12.2",
     "axios": "^1.13.2",
+    "connect-ensure-login": "^0.1.1",
     "connect-session-knex": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -21,6 +23,10 @@
     "express-session": "^1.18.2",
     "node-fetch": "^3.3.2",
     "passport": "^0.7.0",
+    "passport-google-oidc": "^0.1.0",
     "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7"
   }
 }

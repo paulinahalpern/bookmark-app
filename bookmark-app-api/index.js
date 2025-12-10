@@ -1,12 +1,14 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const passport = require("passport");
 const session = require("express-session");
 const { ConnectSessionKnexStore } = require("connect-session-knex");
 const knex = require("./knex.js");
 const axios = require("axios").default;
-
-const urlRouter = require("./routes/api.js");
+const authRouter = require("./routes/auth.js");
+const urlRouter = require("./routes/bookmarks.js");
+const usersRouter = require("./routes/users.js");
 
 app.use(
   cors({
@@ -32,10 +34,15 @@ app.use(
   })
 );
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+app.use("/", authRouter);
+app.use("/", usersRouter);
 app.use("/", urlRouter);
 
 app.listen(process.env.PORT || 3000, () => {
