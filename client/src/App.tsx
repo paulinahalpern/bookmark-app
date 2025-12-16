@@ -45,9 +45,11 @@ export default function App() {
         <Route
           path="/bookmarks"
           element={
-            <div className="flex min-h-screen bg-gray-100">
-              <SideBar />
-              <div className="flex-1 p-6 space-y-6">
+            <div className="flex  bg-gray-100">
+              <div>
+                <SideBar />
+              </div>
+              <div className="flex-1 p-6 ">
                 <Search
                   urlInput={urlInput}
                   setBookmark={setBookmark}

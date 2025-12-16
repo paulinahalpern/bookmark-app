@@ -19,7 +19,8 @@ export default function AuthUser() {
 
   return (
     <div>
-      <h1>{user?.name}</h1>
+      <h1>Hi There, </h1>
+      <h2>{user?.name}</h2>
     </div>
   );
 }

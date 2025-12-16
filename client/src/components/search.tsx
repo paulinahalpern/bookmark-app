@@ -45,15 +45,17 @@ export default function Search({
   }
 
   return (
-    <div className="flex justify-start">
-      <form onSubmit={handleSubmit} className="flex gap-2 p-10">
+    <div className="flex justify-center px-4 md:px-10 py-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col sm:flex-row gap-2 w-full max-w-lg"
+      >
         <label htmlFor="addInput"></label>
         <Input
           id="addInput"
           type="text"
           value={urlInput}
           onChange={handleChange}
-          className="w-200"
           placeholder="Enter bookmark URL"
         ></Input>
         <Button type="submit" variant="default">

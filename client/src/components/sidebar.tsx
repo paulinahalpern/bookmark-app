@@ -1,16 +1,34 @@
-import { SidebarContent, SidebarMenu } from "@/components/ui/sidebar";
+import {
+  SidebarContent,
+  SidebarProvider,
+  SidebarFooter,
+  SidebarMenu,
+  SidebarMenuItem,
+  Sidebar,
+  SidebarHeader,
+} from "@/components/ui/sidebar";
+
 import { Logout } from "./logout";
 import AuthUser from "./auth-user";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export default function SideBar() {
   return (
-    <SidebarMenu className="w-64 h-screen bg-white">
-      <SidebarContent className="flex flex-col justify-between h-full p-4">
-        <div className="space-y-4">
+    <SidebarProvider>
+      <SidebarTrigger />
+      <Sidebar>
+        <SidebarHeader>
           <AuthUser />
-          <Logout />
-        </div>
-      </SidebarContent>
-    </SidebarMenu>
+        </SidebarHeader>
+        <SidebarContent />
+        <SidebarFooter>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <Logout />
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
+      </Sidebar>
+    </SidebarProvider>
   );
 }
