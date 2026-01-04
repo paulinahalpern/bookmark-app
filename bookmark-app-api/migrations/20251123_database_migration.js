@@ -12,6 +12,9 @@ exports.up = async function (knex) {
     .createTable("users", (table) => {
       table.uuid("id").primary().defaultTo(knex.fn.uuid());
       table.string("name", 255).notNullable();
+      table.string("username", 255);
+      table.string("hashed_password", 255);
+      table.string("salt", 255);
       table.string("provider", 255).notNullable();
       table.string("provider_id", 255).notNullable();
       table.timestamp("created_at");

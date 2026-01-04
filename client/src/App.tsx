@@ -6,6 +6,7 @@ import { Login } from "./components/login";
 import "./index.css";
 import { Routes, Route } from "react-router-dom";
 import SideBar from "./components/sidebar";
+import { SignUp } from "./components/sign-up";
 
 export type Bookmark = {
   index: string;
@@ -24,6 +25,8 @@ export type BookmarkProps = {
 export default function App() {
   const [bookmark, setBookmark] = useState<Bookmark[]>([]);
   const [urlInput, setUrlInput] = useState<string>("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setUrlInput(event.target.value);
@@ -41,13 +44,36 @@ export default function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <Login
+              username={username}
+              password={password}
+              setUsername={setUsername}
+              setPassword={setPassword}
+            />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <SignUp
+              username={username}
+              password={password}
+              setUsername={setUsername}
+              setPassword={setPassword}
+            />
+          }
+        />
         <Route
           path="/bookmarks"
           element={
-            <div className="flex min-h-screen bg-gray-100">
-              <SideBar />
-              <div className="flex-1 p-6 space-y-6">
+            <div className="flex  bg-gray-100">
+              <div>
+                <SideBar />
+              </div>
+              <div className="flex-1 p-6 ">
                 <Search
                   urlInput={urlInput}
                   setBookmark={setBookmark}

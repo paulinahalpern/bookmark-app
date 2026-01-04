@@ -6,9 +6,10 @@ const session = require("express-session");
 const { ConnectSessionKnexStore } = require("connect-session-knex");
 const knex = require("./knex.js");
 const axios = require("axios").default;
-const authRouter = require("./routes/auth.js");
+const authRouter = require("./routes/google-routes.js");
 const urlRouter = require("./routes/bookmarks.js");
 const usersRouter = require("./routes/users.js");
+const authRoutes = require("./routes/auth-routes.js")
 
 app.set("trust proxy", 1);
 
@@ -31,8 +32,8 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
-      secure: true,
-      sameSite: "none",
+      // secure: true,
+      // sameSite: "none",
     },
     store: new ConnectSessionKnexStore({
       knex: knex,
@@ -51,6 +52,7 @@ app.get("/", (req, res) => {
 app.use("/", authRouter);
 app.use("/", usersRouter);
 app.use("/", urlRouter);
+app.use("/", authRoutes)
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server listening on port ${process.env.PORT || 3000}`);
