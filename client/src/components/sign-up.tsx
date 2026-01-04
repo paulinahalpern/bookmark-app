@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
   CardContent,
@@ -11,30 +10,35 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { api } from "@/lib/api";
+import type { SignUpProps } from "@/App";
+import axios from "axios";
 
-export function SignUp({ setUsername, setPassword, username, password }) {
+export function SignUp({
+  setUsername,
+  setPassword,
+  username,
+  password,
+}: SignUpProps) {
   const [error, setError] = useState<string | null>(null);
-
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
-      const res = await fetch(`${apiBaseUrl}/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await res.json();
-      console.log(data);
-      if (!res.ok) {
-        if (res.status === 409) {
-          setError("User already exists");
-        }
-      }
+      const res = await api.post("/signup", { username, password });
+      console.log("Signup successful:", res.data);
     } catch (err) {
+      if (axios.isAxiosError(err)) {
+        if (err.response?.status === 409) {
+          setError("User already exists");
+        } else {
+          setError("Signup failed");
+        }
+      } else {
+        setError("Unexpected error");
+      }
+
       console.error("Signup error:", err);
     }
   }
@@ -42,17 +46,17 @@ export function SignUp({ setUsername, setPassword, username, password }) {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Create an account</CardTitle>
-          <CardDescription>
-            Enter your details below to create a new account
-          </CardDescription>
-          <CardAction>
-            <Button variant="link">Sign Up</Button>
-          </CardAction>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+          <CardHeader>
+            <CardTitle>Create an account</CardTitle>
+            <CardDescription>
+              Enter your details below to create a new account
+            </CardDescription>
+            <CardAction>
+              <Button variant="link">Sign Up</Button>
+            </CardAction>
+          </CardHeader>
+          <CardContent>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="username">Username</Label>
@@ -87,8 +91,8 @@ export function SignUp({ setUsername, setPassword, username, password }) {
                 </div>
               )}
             </div>
-          </form>
-        </CardContent>
+          </CardContent>
+        </form>
       </Card>
     </div>
   );
