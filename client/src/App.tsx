@@ -22,6 +22,13 @@ export type BookmarkProps = {
   onDelete: (id: string, index: number) => Promise<void>;
 };
 
+export type SignUpProps = {
+  username: string;
+  password: string;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+};
+
 export default function App() {
   const [bookmark, setBookmark] = useState<Bookmark[]>([]);
   const [urlInput, setUrlInput] = useState<string>("");
