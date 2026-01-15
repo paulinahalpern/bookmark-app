@@ -15,11 +15,13 @@ export type Bookmark = {
   description: string;
   image: string;
   url: string;
+  isFavourite: boolean;
 };
 
 export type BookmarkProps = {
   bookmark: Bookmark[];
   onDelete: (id: string, index: number) => Promise<void>;
+  setBookmark: React.Dispatch<React.SetStateAction<Bookmark[]>>;
 };
 
 export type SignUpProps = {
@@ -87,7 +89,11 @@ export default function App() {
                   setUrlInput={setUrlInput}
                   handleChange={handleChange}
                 />
-                <BookmarkList bookmark={bookmark} onDelete={deleteBookmark} />
+                <BookmarkList
+                  bookmark={bookmark}
+                  onDelete={deleteBookmark}
+                  setBookmark={setBookmark}
+                />
               </div>
             </div>
           }

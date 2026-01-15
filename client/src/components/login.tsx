@@ -81,7 +81,7 @@ export function Login({
             <Button type="submit" className="w-full">
               Login
             </Button>
-            <Button variant="outline" className="w-full">
+            <Button className="w-full">
               <a
                 href={`${apiBaseUrl}/auth/google`}
                 className="hover:text-blue-500 p-4"
