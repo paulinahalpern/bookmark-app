@@ -7,6 +7,7 @@ import "./index.css";
 import { Routes, Route } from "react-router-dom";
 import SideBar from "./components/sidebar";
 import { SignUp } from "./components/sign-up";
+import ProtectedRoutes from "./lib/protected-routes";
 
 export type Bookmark = {
   index: string;
@@ -75,29 +76,31 @@ export default function App() {
             />
           }
         />
-        <Route
-          path="/bookmarks"
-          element={
-            <div className="flex  bg-gray-100">
-              <div>
-                <SideBar />
+        <Route element={<ProtectedRoutes />}>
+          <Route
+            path="/bookmarks"
+            element={
+              <div className="flex bg-gray-100">
+                <div>
+                  <SideBar />
+                </div>
+                <div className="flex-1 p-6 ">
+                  <Search
+                    urlInput={urlInput}
+                    setBookmark={setBookmark}
+                    setUrlInput={setUrlInput}
+                    handleChange={handleChange}
+                  />
+                  <BookmarkList
+                    bookmark={bookmark}
+                    onDelete={deleteBookmark}
+                    setBookmark={setBookmark}
+                  />
+                </div>
               </div>
-              <div className="flex-1 p-6 ">
-                <Search
-                  urlInput={urlInput}
-                  setBookmark={setBookmark}
-                  setUrlInput={setUrlInput}
-                  handleChange={handleChange}
-                />
-                <BookmarkList
-                  bookmark={bookmark}
-                  onDelete={deleteBookmark}
-                  setBookmark={setBookmark}
-                />
-              </div>
-            </div>
-          }
-        />
+            }
+          />
+        </Route>
       </Routes>
     </div>
   );

@@ -9,6 +9,7 @@ exports.up = async function (knex) {
       table.string("url", 255).notNullable();
       table.string("user_id").notNullable();
       table.boolean("isFavourite").defaultTo(false);
+      table.timestamp("created_at").defaultTo(knex.fn.now());
     })
     .createTable("users", (table) => {
       table.uuid("id").primary().defaultTo(knex.fn.uuid());
