@@ -61,11 +61,7 @@ export default function BookmarkList({
   return (
     <div>
       <div>
-        <DropdownMenu
-          onValueChange={(value) =>
-            setSort(value as "created_at" | "favourite")
-          }
-        >
+        <DropdownMenu>
           <DropdownMenuTrigger className="m-2 px-4 py-2 border rounded">
             Sort by
           </DropdownMenuTrigger>
