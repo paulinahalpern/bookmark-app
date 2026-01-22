@@ -1,5 +1,6 @@
 import { api } from "@/lib/api";
 import { useEffect, useState } from "react";
+import { FaRegUser } from "react-icons/fa";
 
 type User = {
   id: string;
@@ -19,7 +20,10 @@ export default function AuthUser() {
 
   return (
     <div>
-      <h1>Hi There, </h1>
+      <h1>
+        Hi There, <FaRegUser />
+
+      </h1>
       <h2>{user?.name}</h2>
     </div>
   );

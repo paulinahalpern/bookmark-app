@@ -3,6 +3,7 @@ import { api } from "../lib/api";
 import type { Bookmark } from "../App";
 import { Button } from "@/components/ui/button";
 import { Input } from "./ui/input";
+import { GiBookmark } from "react-icons/gi";
 
 interface SearchProps {
   urlInput: string;
@@ -45,12 +46,14 @@ export default function Search({
   }
 
   return (
-    <div className="flex justify-center px-4 md:px-10 py-4">
+    <div className="flex px-4 md:px-10 py-4">
+      
       <form
         onSubmit={handleSubmit}
         className="flex flex-col sm:flex-row gap-2 w-full max-w-lg"
       >
         <label htmlFor="addInput"></label>
+
         <Input
           id="addInput"
           type="text"
@@ -58,10 +61,13 @@ export default function Search({
           onChange={handleChange}
           placeholder="Enter bookmark URL"
         ></Input>
+
         <Button type="submit" variant="default">
-          ADD
+          ADD <GiBookmark />
         </Button>
+        
       </form>
+   
     </div>
   );
 }
