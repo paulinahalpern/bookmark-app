@@ -62,7 +62,7 @@ export default function BookmarkList({
     <div>
       <div>
         <DropdownMenu>
-          <DropdownMenuTrigger className="m-2 px-4 py-2 border rounded">
+          <DropdownMenuTrigger className="m-2 py-2 border rounded">
             Sort by
           </DropdownMenuTrigger>
           <DropdownMenuContent>
