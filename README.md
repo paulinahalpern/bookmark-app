@@ -1,3 +1,9 @@
+| Screen | Login Page | Mobile Version |
+|-------|-------|-------|
+| ![Screenshot 1](https://github.com/user-attachments/assets/98ddb632-f075-45d3-a83a-56f18409441a) | ![Screenshot 2](https://github.com/user-attachments/assets/ff9cd2b1-061d-4745-bc82-e1d3f8153dcf) | ![Screenshot 3](https://github.com/user-attachments/assets/4ee19884-717f-4132-a0fa-ed4da252b10b) 
+
+
+
 Project Purpose:
 This project is a full-stack bookmark application that allows users to efficiently save, view, and manage their favorite web links. It emphasizes a clean, intuitive UI and persistent backend storage to provide a seamless user experience.
 
