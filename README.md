@@ -49,3 +49,5 @@ UI/UX Design: Developed with a clean and user-centered approach, inspired by wir
             `npm run dev`
    
 Open `http://localhost:5000` to view the app in your browser.
+
+[Licence MIT](/LICENSE)
