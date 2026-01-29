@@ -46,7 +46,7 @@ export default function Search({
   }
 
   return (
-    <div className="flex px-4 md:px-10 py-4">
+    <div className="flex md:px-10 py-4">
       
       <form
         onSubmit={handleSubmit}
