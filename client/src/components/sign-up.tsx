@@ -13,6 +13,7 @@ import { useState } from "react";
 import { api } from "@/lib/api";
 import type { SignUpProps } from "@/App";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function SignUp({
   setUsername,
@@ -21,6 +22,7 @@ export function SignUp({
   password,
 }: SignUpProps) {
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -28,6 +30,7 @@ export function SignUp({
     try {
       const res = await api.post("/signup", { username, password });
       console.log("Signup successful:", res.data);
+      navigate("/");
     } catch (err) {
       if (axios.isAxiosError(err)) {
         if (err.response?.status === 409) {

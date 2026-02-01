@@ -80,7 +80,6 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/login/password", (req, res, next) => {
-  console.log("failed");
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return res.status(500).json({ message: "Internal server error" });
