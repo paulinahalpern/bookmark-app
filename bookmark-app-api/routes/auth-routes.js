@@ -50,6 +50,10 @@ passport.deserializeUser(function (user, cb) {
   return cb(null, user);
 });
 
+router.get("/login", function (req, res) {
+  res.render("login");
+});
+
 router.post("/signup", async (req, res) => {
   try {
     const { username, password } = req.body;
